@@ -1,5 +1,5 @@
-
-
+const outputNum = document.querySelector(".num-output")
+const allDisplayButtons = document.querySelectorAll(".display-btn")
 
 function add(a, b) {
     return a + b
@@ -33,3 +33,11 @@ function operate(firstNum, operator, secondNum) {
         return divide(firstNum, secondNum)
     }
 }
+
+
+allDisplayButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        const value = e.target.dataset.value
+        outputNum.innerText += value
+    })
+})
