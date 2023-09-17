@@ -38,29 +38,43 @@ numberButtons.forEach((btn) => {
 
 
 function handleNumber(number) {
-    if (pre)
-
-
-        if (currentNum.length <= 11) {
-            currentNum += number
-            currentDisplayNumber.textContent = currentNum
-        }
+    if (previousNum !== "" && currentNum !== "" && operator === "") {
+        previousNum = ""
+        currentDisplayNumber.textContent = currentNum
+    }
+    if (currentNum.length <= 11) {
+        currentNum += number
+        currentDisplayNumber.textContent = currentNum
+    }
 }
 
 
 operators.forEach(btn => {
-    btn.addEventListener("click", (e) =>
+    btn.addEventListener("click", (e) => {
         handleOperator(e.target.textContent)
-    )
+    })
 })
 
 
 function handleOperator(op) {
-    operator = op;
-    previousNum = currentNum;
-    previousDisplayNumber.textContent = previousNum + "" + operator
-    currentNum = ""
-    currentDisplayNumber.textContent = ""
+    if (previousNum === "") {
+        previousNum = currentNum;
+        operatorCheck(op)
+    } else if (currentNum === "") {
+        operatorCheck(op);
+    } else {
+        calculate()
+        operator = op;
+        currentDisplayNumber.textContent = "0";
+        previousDisplayNumber.textContent = previousNum + " " + operator;
+    }
+}
+
+function operatorCheck(text) {
+    operator = text;
+    currentDisplayNumber.textContent = "0";
+    currentNum = "";
+    previousDisplayNumber.textContent = previousNum + "" + operator;
 }
 
 
@@ -104,8 +118,7 @@ function roundNumber(num) {
 
 
 function displayResults() {
-    previousDisplayNumber.textContent = ""
-    currentDisplayNumber.textContent = previousNum
+
     operator = ""
     if (previousNum.length <= 11) {
         currentDisplayNumber.textContent = previousNum
@@ -114,6 +127,9 @@ function displayResults() {
         currentDisplayNumber.textContent = previousNum.slice(0, 11) + "..."
     }
     //ask for psuedo code on this tommorow since I don't understand this as well.
+    previousDisplayNumber.textContent = ""
+    currentDisplayNumber.textContent = previousNum
+    currentNum = ""
 }
 
 function clearCalculator() {
