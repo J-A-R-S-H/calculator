@@ -38,10 +38,13 @@ numberButtons.forEach((btn) => {
 
 
 function handleNumber(number) {
-    if (currentNum.length <= 11) {
-        currentNum += number
-        currentDisplayNumber.textContent = currentNum
-    }
+    if (pre)
+
+
+        if (currentNum.length <= 11) {
+            currentNum += number
+            currentDisplayNumber.textContent = currentNum
+        }
 }
 
 
@@ -110,6 +113,7 @@ function displayResults() {
     else {
         currentDisplayNumber.textContent = previousNum.slice(0, 11) + "..."
     }
+    //ask for psuedo code on this tommorow since I don't understand this as well.
 }
 
 function clearCalculator() {
