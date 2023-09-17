@@ -63,11 +63,11 @@ function handleOperator(op) {
 
 function calculate() {
     previousNum = Number(previousNum)
-    current = Number(currentNum)
+    currentNum = Number(currentNum)
 
 
     if (operator === "+") {
-        previousNum = previousNum += currentNum
+        previousNum += currentNum
     }
     else if (operator === "-") {
         previousNum = previousNum -= currentNum
@@ -91,6 +91,7 @@ function calculate() {
     previousNum = roundNumber(previousNum)
     previousNum = previousNum.toString()
     displayResults()
+    return
 }
 
 
@@ -118,3 +119,4 @@ function clearCalculator() {
     currentDisplayNumber.textContent = "0"
     previousDisplayNumber.textContent = ""
 }
+
