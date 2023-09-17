@@ -7,6 +7,7 @@ let operator = "";
 const currentDisplayNumber = document.querySelector(".currentNumber")
 const previousDisplayNumber = document.querySelector(".previousNumber")
 
+window.addEventListener("keydown", handleKeyPress)
 
 const equal = document.querySelector(".equal")
 equal.addEventListener("click", () => {
@@ -17,7 +18,9 @@ equal.addEventListener("click", () => {
 
 
 const decimal = document.querySelector(".decimal")
-
+decimal.addEventListener("click", () => {
+    addDecimal();
+})
 
 const clear = document.querySelector(".clear")
 clear.addEventListener("click", clearCalculator)
@@ -46,6 +49,7 @@ function handleNumber(number) {
         currentNum += number
         currentDisplayNumber.textContent = currentNum
     }
+
 }
 
 
@@ -140,3 +144,28 @@ function clearCalculator() {
     previousDisplayNumber.textContent = ""
 }
 
+function addDecimal() {
+    if (!currentNum.includes(".")) {
+        currentNum += "."
+        currentDisplayNumber.textContent = currentNum
+    }
+}
+
+function handleKeyPress(e) {
+    e.preventDefault()
+    if (e.key >= 0 && e.key <= 9) {
+        handleNumber(e.key)
+    }
+    if (e.key === "Enter" || (e.key === "=" && currentNum !== "" && previousNum !== "")) {
+        calculate()
+    }
+    if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") {
+        handleOperator(e.key)
+    }
+    if (e.key === "*") {
+        handleOperator("x")
+    }
+    if (e.key === ".") {
+        addDecimal()
+    }
+}
